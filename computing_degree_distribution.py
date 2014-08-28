@@ -1,6 +1,7 @@
 """
 A program for computing degree distributons for graphs
 """
+import math
 
 #the example graphs
 EX_GRAPH0 = {0: set([1, 2]), 1: set([]), 2: set([])}
@@ -56,5 +57,25 @@ def in_degree_distribution(digraph):
 			in_degree_dis[a_node_value] = in_degree_dis[a_node_value] + 1
 	return in_degree_dis
 
+def normalize_distribution(distribution, type = 'STANDARD'):
+	"""
+	normalize a distribution and return a tuple of two lists. One of them is 
+	"""
+	distribution_sum = 0
+	for number in distribution:
+		distribution_sum = distribution_sum + distribution[number]
+
+	distribution_key = []
+	distribution_value = []
+	del distribution[0]
+	for number in distribution:
+		if type == 'STANDARD':
+			distribution_key.append(number)
+			distribution_value.append(float(distribution[number]) / distribution_sum)
+		else:
+			distribution_key.append(math.log(number))
+			distribution_value.append(math.log(float(distribution[number]) / distribution_sum))
+	return [list(x) for x in zip(*sorted(zip(distribution_key, distribution_value), key = lambda pair: pair[0]))]
+	
 #print in_degree_distribution(EX_GRAPH2)
 #print compute_in_degrees(EX_GRAPH0)
