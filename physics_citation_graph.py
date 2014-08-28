@@ -1,7 +1,11 @@
 """
 Plot a graph of physics citation graph
 """
+from computing_degree_distribution import *
+import matplotlib.pyplot as pyplot
+
 GRAPH_FILE_NAME = "alg_phys-cite.txt"
+
 def load_graph(graph_file_name):
 	"""
 	Function that loads a graph file and returns a dictionary that models a graph
@@ -22,5 +26,21 @@ def load_graph(graph_file_name):
 
 	return a_graph
 
+def normalize_distribution(distribution):
+	"""
+	normalize a distribution and return a tuple of two lists. One of them is 
+	"""
+	distribution_sum = 0
+	for number in distribution:
+		distribution_sum = distribution_sum + distribution[number]
+
+	distribution_key = []
+	distribution_value = []
+	for number in distribution:
+		distribution_key.append(number)
+		distribution_value.append(float(distribution_sum) / distribution[number])
+	return (distribution_key, distribution_value)
+
 #Test input graph
-print load_graph(GRAPH_FILE_NAME)
+physic_graph = load_graph(GRAPH_FILE_NAME)
+print normalize_distribution(in_degree_distribution(physic_graph))
