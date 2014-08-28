@@ -45,11 +45,11 @@ def normalize_distribution(distribution, type = 'STANDARD'):
 		else:
 			distribution_key.append(math.log(number))
 			distribution_value.append(math.log(float(distribution[number]) / distribution_sum))
-	return (distribution_key, distribution_value)
+	return [list(x) for x in zip(*sorted(zip(distribution_key, distribution_value), key = lambda pair: pair[0]))]
 
 #Test input graph
 physic_graph = load_graph(GRAPH_FILE_NAME)
-(plot_x, plot_y) = normalize_distribution(in_degree_distribution(physic_graph), 'LOGLOG')
-pyplot.plot(plot_x, plot_y, 'r.')
+plot_list = normalize_distribution(in_degree_distribution(physic_graph), 'STANDARD')
+pyplot.plot(plot_list[0], plot_list[1], 'r-')
 pyplot.show()
-# print (plot_x, plot_y)
+# print plot_list
