@@ -49,7 +49,7 @@ def normalize_distribution(distribution, type = 'STANDARD'):
 
 #Test input graph
 physic_graph = load_graph(GRAPH_FILE_NAME)
-plot_list = normalize_distribution(in_degree_distribution(physic_graph), 'STANDARD')
+plot_list = normalize_distribution(in_degree_distribution(physic_graph), 'LOGLOG')
 pyplot.plot(plot_list[0], plot_list[1], 'r-')
 pyplot.show()
 # print plot_list
