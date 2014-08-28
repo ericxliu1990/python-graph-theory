@@ -3,6 +3,7 @@ Plot a graph of physics citation graph
 """
 from computing_degree_distribution import *
 import matplotlib.pyplot as pyplot
+import math
 
 GRAPH_FILE_NAME = "alg_phys-cite.txt"
 
@@ -26,7 +27,7 @@ def load_graph(graph_file_name):
 
 	return a_graph
 
-def normalize_distribution(distribution):
+def normalize_distribution(distribution, type = 'STANDARD'):
 	"""
 	normalize a distribution and return a tuple of two lists. One of them is 
 	"""
@@ -36,11 +37,19 @@ def normalize_distribution(distribution):
 
 	distribution_key = []
 	distribution_value = []
+	del distribution[0]
 	for number in distribution:
-		distribution_key.append(number)
-		distribution_value.append(float(distribution_sum) / distribution[number])
+		if type == 'STANDARD':
+			distribution_key.append(number)
+			distribution_value.append(float(distribution[number]) / distribution_sum)
+		else:
+			distribution_key.append(math.log(number))
+			distribution_value.append(math.log(float(distribution[number]) / distribution_sum))
 	return (distribution_key, distribution_value)
 
 #Test input graph
 physic_graph = load_graph(GRAPH_FILE_NAME)
-print normalize_distribution(in_degree_distribution(physic_graph))
+(plot_x, plot_y) = normalize_distribution(in_degree_distribution(physic_graph), 'LOGLOG')
+pyplot.plot(plot_x, plot_y, 'r.')
+pyplot.show()
+# print (plot_x, plot_y)

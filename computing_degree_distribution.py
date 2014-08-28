@@ -56,5 +56,5 @@ def in_degree_distribution(digraph):
 			in_degree_dis[a_node_value] = in_degree_dis[a_node_value] + 1
 	return in_degree_dis
 
-print in_degree_distribution(EX_GRAPH2)
-print compute_in_degrees(EX_GRAPH0)
+#print in_degree_distribution(EX_GRAPH2)
+#print compute_in_degrees(EX_GRAPH0)
