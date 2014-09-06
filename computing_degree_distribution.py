@@ -13,19 +13,6 @@ EX_GRAPH2 = {0: set([1, 4, 5]), 1: set([2, 6]), 2: set([3, 7]),
 		6: set([]), 7: set([3]), 8: set([1, 2]),
 		9: set([0, 3, 4, 5, 6, 7])}
 
-def make_complete_graph(num_nodes):
-	"""
-	take a number and return complete graph of that number
-	"""
-	complete_graph = dict()
-	for index_i in range(num_nodes):
-		a_set = set([])
-		for index_j in range(num_nodes):
-			if not index_j  == index_i:
-				a_set.add(index_j)
-		complete_graph[index_i] = a_set
-	return complete_graph
-
 def compute_in_degrees(digraph):
 	"""
 	take a directed graph and return a map of in-degrees of nodes to the nodes 
@@ -67,7 +54,8 @@ def normalize_distribution(distribution, type = 'STANDARD'):
 
 	distribution_key = []
 	distribution_value = []
-	del distribution[0]
+	if  distribution.get(0):
+		del distribution[0]
 	for number in distribution:
 		if type == 'STANDARD':
 			distribution_key.append(number)
@@ -76,6 +64,6 @@ def normalize_distribution(distribution, type = 'STANDARD'):
 			distribution_key.append(math.log(number))
 			distribution_value.append(math.log(float(distribution[number]) / distribution_sum))
 	return [list(x) for x in zip(*sorted(zip(distribution_key, distribution_value), key = lambda pair: pair[0]))]
-	
+
 #print in_degree_distribution(EX_GRAPH2)
 #print compute_in_degrees(EX_GRAPH0)
