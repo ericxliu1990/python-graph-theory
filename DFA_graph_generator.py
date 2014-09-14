@@ -31,4 +31,4 @@ def DFA_degree_generator(node_number, complete_node_num):
 	return graph
 
 # print make_complete_graph(5)
-print DFA_degree_generator(27770, 100)
+print DFA_degree_generator(27770, 1)
