@@ -17,7 +17,7 @@ def make_complete_graph(node_number):
 		complete_graph[index_i] = a_set
 	return complete_graph
 
-def DFA_degree_generator(node_number, complete_node_num):
+def DPA_degree_generator(node_number, complete_node_num):
 	"""
 	"""
 	if node_number < complete_node_num:
