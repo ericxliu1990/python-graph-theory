@@ -23,7 +23,6 @@ def bfs_visited(ugraph, start_node):
 				visited.add(neigboor)
 				queue.append(neigboor)
 	return visited
-
 def  cc_visited(ugraph):
 	"""
 	Takes the undirected graph ugraph and returns a list of sets, 
@@ -50,32 +49,6 @@ def largest_cc_size(ugraph):
 	for a_component in component_list:
 		max_cc_size = max(max_cc_size, len(a_component))
 	return max_cc_size
-
-def compute_resilience(ugraph, attack_order):
-	"""
-	Takes the undirected graph ugraph, a list of nodes attack_order and 
-	iterates through the nodes in attack_order. For each node in the list, 
-	the function removes the given node and its edges from the graph 
-	and then computes the size of the largest connected component for 
-	the resulting graph.
-	"""
-	def remove_nodes(a_node):
-		"""remove a node from an undirected graph"""
-		for a_neighboor in ugraph[a_node]:
-			ugraph[a_neighboor].remove(a_node)
-		del ugraph[a_node]
-
-	a_graph = ugraph
-	largest_component_list = list()
-	largest_component_list.append(largest_cc_size(a_graph))
-	for an_order in attack_order:
-		if an_order in a_graph:
-			remove_nodes(an_order)
-			largest_component_list.append(largest_cc_size(a_graph))
-		else:
-			print an_order
-			raise Exception
-	return largest_component_list
 
 # def main():
 # 	attack_order = [1, 2, 3]
